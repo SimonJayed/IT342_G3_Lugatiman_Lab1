@@ -1,6 +1,6 @@
-package com.joy.lab1.config;
+package com.lugatiman.lab1.config;
 
-import com.joy.lab1.service.CustomUserDetailsService;
+import com.lugatiman.lab1.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

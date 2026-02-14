@@ -1,4 +1,4 @@
-package com.joy.lab1.entity;
+package com.lugatiman.lab1.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

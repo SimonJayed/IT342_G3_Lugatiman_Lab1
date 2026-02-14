@@ -1,6 +1,6 @@
-package com.joy.lab1.repository;
+package com.lugatiman.lab1.repository;
 
-import com.joy.lab1.entity.User;
+import com.lugatiman.lab1.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

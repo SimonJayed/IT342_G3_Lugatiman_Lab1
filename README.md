@@ -1,4 +1,4 @@
-# IT342_G4_Joy_Lab1
+# IT342_G3_Lugatiman_Lab1
 
 ## Project Description
 A full-stack application with a Spring Boot backend and ReactJS frontend, demonstrating authentication and user profile management.

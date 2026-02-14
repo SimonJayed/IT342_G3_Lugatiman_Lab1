@@ -1,7 +1,7 @@
-package com.joy.lab1.controller;
+package com.lugatiman.lab1.controller;
 
-import com.joy.lab1.entity.User;
-import com.joy.lab1.service.UserService;
+import com.lugatiman.lab1.entity.User;
+import com.lugatiman.lab1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

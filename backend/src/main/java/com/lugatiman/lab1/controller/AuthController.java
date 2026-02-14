@@ -1,9 +1,9 @@
-package com.joy.lab1.controller;
+package com.lugatiman.lab1.controller;
 
-import com.joy.lab1.dto.LoginDto;
-import com.joy.lab1.dto.UserDto;
-import com.joy.lab1.entity.User;
-import com.joy.lab1.service.UserService;
+import com.lugatiman.lab1.dto.LoginDto;
+import com.lugatiman.lab1.dto.UserDto;
+import com.lugatiman.lab1.entity.User;
+import com.lugatiman.lab1.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.joy.lab1.dto;
+package com.lugatiman.lab1.dto;
 
 import lombok.Data;
 

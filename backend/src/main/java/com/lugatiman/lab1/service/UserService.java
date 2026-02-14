@@ -1,8 +1,8 @@
-package com.joy.lab1.service;
+package com.lugatiman.lab1.service;
 
-import com.joy.lab1.dto.UserDto;
-import com.joy.lab1.entity.User;
-import com.joy.lab1.repository.UserRepository;
+import com.lugatiman.lab1.dto.UserDto;
+import com.lugatiman.lab1.entity.User;
+import com.lugatiman.lab1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
