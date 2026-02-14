@@ -16,7 +16,7 @@ A full-stack application with a Spring Boot backend and ReactJS frontend, demons
 
 ## Steps to Run Web App
 1. Navigate to `/web`.
-2. Run `npm install`.
+2. Run `npm install`. (Run `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` if npm install fails)
 3. Run `npm run dev`.
 
 ## Steps to Run Mobile App
