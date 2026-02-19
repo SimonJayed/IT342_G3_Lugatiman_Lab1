@@ -13,7 +13,7 @@ Grossery is a full-stack grocery planning and tracking application designed to h
 
 ## Steps to Run Backend
 1.  Open the `/backend` folder in your IDE (IntelliJ IDEA recommended).
-2.  Ensure you have **MySQL** running and a database named `grossery_v2` created.
+2.  Ensure you have **MySQL** running and a database named `lab1_db` created.
     - *Note: The app is configured to `update` the schema automatically.*
 3.  Run the application via the main class `Lab1Application.java` or use the terminal:
     ```bash
