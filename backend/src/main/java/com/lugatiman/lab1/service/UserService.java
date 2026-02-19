@@ -19,11 +19,17 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(UserDto userDto) {
-        if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
-            throw new RuntimeException("Username already exists");
+        if (userRepository.existsByUsername(userDto.getUsername())) {
+            throw new RuntimeException("Username is already taken!");
         }
+        if (userRepository.existsByEmail(userDto.getEmail())) {
+            throw new RuntimeException("Email is already taken!");
+        }
+
         User user = new User();
         user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        user.setName(userDto.getName());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole("USER");
         return userRepository.save(user);

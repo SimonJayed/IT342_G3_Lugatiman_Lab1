@@ -5,7 +5,7 @@ import com.lugatiman.lab1.dto.UserDto;
 import com.lugatiman.lab1.entity.User;
 import com.lugatiman.lab1.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,34 +25,65 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private com.lugatiman.lab1.security.JwtTokenProvider tokenProvider;
+
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto userDto) {
         try {
             User user = userService.registerUser(userDto);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
+            return new ResponseEntity<>(
+                    new com.lugatiman.lab1.payload.ApiResponse(true, "User registered successfully", user),
+                    HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new com.lugatiman.lab1.payload.ApiResponse(false, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginDto loginDto, HttpServletRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginDto) {
+        System.out.println("DEBUG: Login endpoint hit for: " + loginDto.getUsernameOrEmail());
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginDto.getUsernameOrEmail(),
+                            loginDto.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = tokenProvider.generateToken(authentication);
 
-        return new ResponseEntity<>("User signed-in successfully!", HttpStatus.OK);
+            User userDetails = userService.findByUsername(loginDto.getUsernameOrEmail())
+                    .orElse(null);
+
+            if (userDetails == null) {
+                // Try by email if not found by username.
+                // Note: findByUsername implementation in repo usually only checks username
+                // column unless custom query.
+                // For now, let's assume if authentication passed, we can find them.
+                // If the input was email, we might need a findByEmail or findByUsernameOrEmail.
+                // But strictly matching the authentication logic:
+                String username = authentication.getName();
+                userDetails = userService.findByUsername(username)
+                        .orElseThrow(() -> new RuntimeException("User not found after authentication"));
+            }
+
+            return ResponseEntity.ok(new com.lugatiman.lab1.payload.JwtAuthenticationResponse(
+                    jwt,
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    userDetails.getName()));
+        } catch (org.springframework.security.core.AuthenticationException e) {
+            return new ResponseEntity<>(
+                    new com.lugatiman.lab1.payload.ApiResponse(false, "Authentication failed: " + e.getMessage()),
+                    HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        return new ResponseEntity<>("Logged out successfully", HttpStatus.OK);
+        // Stateless logout (client-side clears token)
+        return new ResponseEntity<>(new com.lugatiman.lab1.payload.ApiResponse(true, "Logged out successfully"),
+                HttpStatus.OK);
     }
 }

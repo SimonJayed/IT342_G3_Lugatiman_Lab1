@@ -1,28 +1,53 @@
 # IT342_G3_Lugatiman_Lab1
 
 ## Project Description
-A full-stack application with a Spring Boot backend and ReactJS frontend, demonstrating authentication and user profile management.
+Grossery is a full-stack grocery planning and tracking application designed to help users manage their monthly consumption, reduce food waste, and track item expiry dates. It features a secure Spring Boot backend and a responsive ReactJS frontend.
 
 ## Technologies Used
-- **Backend**: Spring Boot, Spring Security, Spring Data JPA, Hibernate
-- **Database**: MySQL
-- **Frontend**: ReactJS, Vite, Axios, React Router
-- **Build Tools**: Maven, NPM
+- **Backend Framework**: Spring Boot 3.x
+- **Security**: Spring Security, JWT (JSON Web Tokens), BCrypt
+- **Database**: MySQL, Spring Data JPA, Hibernate
+- **Frontend Library**: ReactJS (Vite)
+- **Styling**: CSS Modules, Custom Design System
+- **Build Tools**: Maven (Backend), NPM (Frontend)
 
 ## Steps to Run Backend
-1. Navigate to `/backend`.
-2. Ensure MySQL is running and `lab1_db` exists.
-3. Run `mvn spring-boot:run`.
+1.  Open the `/backend` folder in your IDE (IntelliJ IDEA recommended).
+2.  Ensure you have **MySQL** running and a database named `grossery_v2` created.
+    - *Note: The app is configured to `update` the schema automatically.*
+3.  Run the application via the main class `Lab1Application.java` or use the terminal:
+    ```bash
+    cd backend
+    ./mvnw spring-boot:run
+    ```
+4.  The backend will start on `http://localhost:8080`.
 
 ## Steps to Run Web App
-1. Navigate to `/web`.
-2. Run `npm install`. (Run `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` if npm install fails)
-3. Run `npm run dev`.
+1.  Navigate to the `/web` directory.
+2.  Install dependencies:
+    ```bash
+    cd web
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open `http://localhost:5173` in your browser.
 
 ## Steps to Run Mobile App
-(Not yet implemented)
+*(Mobile Application implementation is currently in progress for Lab 2)*
 
-## API Endpoints
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login
-- `GET /api/user/me` - Get current user profile (Protected)
+## List of API Endpoints
+### Authentication
+- `POST /api/auth/register` - Register a new user account.
+- `POST /api/auth/login` - Authenticate and receive a JWT.
+- `POST /api/auth/logout` - Logout (Client-side token removal).
+
+### User Profile
+- `GET /api/user/me` - Retrieve the currently authenticated user's profile.
+
+### Grocery Management (Upcoming)
+- `GET /api/items` - List grocery items.
+- `POST /api/items` - Add a new item.
+

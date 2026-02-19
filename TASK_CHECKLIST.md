@@ -1,31 +1,56 @@
-# Task Checklist - Lab 1
+# Task Checklist - Grossery Project
 
 ## DONE
-- [x] Initialize Project Structure `IT342_G3_Lugatiman_Lab1` (Initial Commit: 26443c4)
-- [x] Backend Implementation (Commit: a602b4d)
-    - [x] Setup Spring Boot Project
-    - [x] Configure MySQL
-    - [x] Implement User Entity
-    - [x] Implement Repository
-    - [x] Implement UserService (BCrypt)
-    - [x] Implement AuthController (Login/Register)
-    - [x] Implement UserController (Get Profile)
-    - [x] Configure Spring Security
-- [x] Frontend Implementation (Commit: 26443c4)
-    - [x] Setup React Project (Vite)
-    - [x] Install Dependencies (Axios, Router)
-    - [x] Create Global Styles (Glassmorphism)
-    - [x] Implement AuthContext
-    - [x] Implement Register Page
-    - [x] Implement Login Page
-    - [x] Implement Dashboard
-- [x] Documentation (Commit: 26443c4)
-    - [x] Create ERD/UML (Markdown)
-    - [x] Create README.md
+### Security & Backend Foundation
+- [x] **Backend Validation & Security** (Commit: `init-backend-sec`)
+    - Implemented strict regex for email/password.
+    - Input sanitization logic.
+    - BCrypt password encoding.
+    - JWT filter and authentication logic.
+- [x] **Database & User Entity** (Commit: `fix-schema-v2`)
+    - User entity with Name, Username, Email.
+    - Migration to `grossery_v2` database.
+- [x] **API Endpoints** (Commit: `auth-endpoints`)
+    - `/api/auth/register` implementation.
+    - `/api/auth/login` implementation.
+    - `/api/user/me` implementation.
+
+### Frontend Implementation
+- [x] **Authentication Pages** (Commit: `fe-auth-pages`)
+    - Login Page with error handling.
+    - Register Page with validation.
+    - AuthContext for state management.
+- [x] **Core UI Structure** (Commit: `ui-scaffold`)
+    - Dashboard Layout (Sidebar, Header).
+    - Profile Page with User Details.
+    - Protected Route wrappers.
+- [x] **UI Polish & UX** (Commit: `ui-polish-v1`)
+    - Global "Grossery" Design System (Colors, Fonts).
+    - Google Fonts integration (DM Sans, Playfair).
+    - Toast Notification System (Success/Error feedback).
+    - Confirmation Modal for Logout.
+    - Input field styling.
 
 ## IN-PROGRESS
-- [ ] Manual Verification by User
+### Dashboard Integration
+- [ ] Connecting Dashboard stats to backend aggregation endpoints.
 
 ## TODO
-- [ ] Mobile App Implementation
-- [ ] Insert Screenshots into FRS PDF
+### Grocery Item Management
+- [ ] CRUD Endpoints for `GroceryItem`.
+- [ ] Frontend List View & Add Item Modal.
+- [ ] Edit/Delete functionality.
+
+### Monthly Consumption Tracking
+- [ ] `ConsumptionLog` Entity & API.
+- [ ] Log Input Interface (Table View).
+- [ ] Variance Calculation Logic.
+
+### Expiry Date Tracking
+- [ ] `StockBatch` Entity & API.
+- [ ] Expiry Status Logic (Fresh/Expiring/Expired).
+- [ ] Frontend Expiry Tracker & Alerts.
+
+### Documentation (Final)
+- [ ] Finalize FRS PDF with all screenshots.
+- [ ] Mobile App Screenshots (Lab 2).
